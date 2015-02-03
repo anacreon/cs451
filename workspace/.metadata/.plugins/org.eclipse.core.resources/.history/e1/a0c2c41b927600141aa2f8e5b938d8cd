@@ -1,0 +1,16 @@
+
+public class Motion {
+
+	public void compensation(String target, String reference) {
+		// TODO Auto-generated method stub
+		Image tframe = new Image(target);
+		Image rframe = new Image(reference);
+		
+		block
+		
+		
+	}
+	
+	
+
+}

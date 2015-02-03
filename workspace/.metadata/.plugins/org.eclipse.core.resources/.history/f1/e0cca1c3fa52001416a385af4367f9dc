@@ -1,0 +1,96 @@
+import java.util.Scanner;
+
+
+public class CS451_Rice 
+{
+	public static void main(String[] args)
+	 {
+	    if(args.length != 2)
+	    {
+	      usage();
+	      System.exit(1);
+	    }
+
+	    System.out.println("--Welcome to Multimedia Software System--");
+	    if(args[0].equals("1"))
+	    {
+	    	ImageManipulation imgmanip = new ImageManipulation(args[1]);
+	    	imageManipMenu(imgmanip, args);
+	    }
+
+	    System.out.println("--Good Bye--");
+	 }
+		
+	public static void imageManipMenu(ImageManipulation imgmanip, String args[]) {
+		int task;
+		System.out.println("Main Menu-----------------------------------");
+		System.out.println("1. Conversion to Gray-scale Image (24bits->8bits)");
+		System.out.println("2. Conversion to Bi-level Image (24bits->1bit)");
+		System.out.println("3. Conversion to N-level Image");
+		System.out.println("4. Conversion to 8bit Indexed Color Image using Uniform Color Quantization (24bits->8bits)");
+		System.out.println("5. Quit");
+		Scanner cin = new Scanner(System.in);
+		do
+		{
+			task = cin.nextInt();
+			if(task ==1)
+			{
+				imgmanip.greyScale();
+				imgmanip.displayIn("Original");
+				imgmanip.displayOut("Grey Scale");
+			}
+			if(task ==2)
+			{
+				System.out.println("Select the conversion option");
+				System.out.println("1. conversion based on average grey");
+				System.out.println("2. conversion using error diffusion");
+				System.out.println("3. cancel");
+				int option;
+				do{
+				option = cin.nextInt();
+				}while(option !=1 && option !=2 && option !=3);
+				if(option ==1)
+				{
+					imgmanip.biLevelavg();
+					imgmanip.displayIn("Original");
+					imgmanip.displayOut("Bi-Level based on average");
+				}
+				if(option == 2)
+				{
+					imgmanip.biLevelErrDif();
+					imgmanip.displayIn("Original");
+					imgmanip.displayOut("Bi-Level error diffusion");
+				}
+			}
+			if(task ==3)
+			{
+				int n;
+				System.out.println("enter the level");
+				n = cin.nextInt();
+				imgmanip.nLevel(n);
+				imgmanip.displayIn("Original");
+				imgmanip.displayOut(n + "-level image");
+				
+			}
+			if(task ==4)
+			{
+				imgmanip.eightBitColor(args[1]);
+				imgmanip.displayIn("Original");
+				imgmanip.displayOut("8-bit color");
+			}			
+			System.out.println("Main Menu-----------------------------------");
+			System.out.println("1. Conversion to Gray-scale Image (24bits->8bits)");
+			System.out.println("2. Conversion to Bi-level Image (24bits->1bit)");
+			System.out.println("3. Conversion to N-level Image");
+			System.out.println("4. Conversion to 8bit Indexed Color Image using Uniform Color Quantization (24bits->8bits)");
+			System.out.println("5. Quit");
+		}while(task != 5);
+	}
+
+	public static void usage()
+	  {
+	    System.out.println("\nUsage: java CS451_Main [Homework] [inputfile]\n");
+	  }
+	  //two image instances one for input the other for output
+	  //gray scale calculations grey = 0.299*red +
+}
